@@ -2,13 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
 package minireto.aplicacion;
-
 import java.time.LocalDate;
 import java.util.Scanner;
 
 /**
  *
- * @author Pablo
+ * @author Equipo1
  */
 public class Aplicacion {
 

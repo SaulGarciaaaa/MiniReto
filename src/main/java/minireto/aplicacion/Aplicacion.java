@@ -83,6 +83,7 @@ public class Aplicacion {
         int genero = new Scanner(System.in).nextInt();
        /* if (existeUsuario(nombre,ap1,ap2)==false) {
                Usuario U1 = new Usuario(nombre, ap1, ap2, email, fecha, prov, genero);
+                 System.out.println("Usuario guardado....");
         }else{
             System.out.println("El usuario ya esta creado");
         }

@@ -23,7 +23,7 @@ public class Usuario {
     private Genero genero;
     private Perfil perfil;
 
-    public Usuario(String nombre, String apellido1, String apellido2, String email, LocalDate fechanac, String provincia, String telefono, int genero) {
+    public Usuario(String nombre, String apellido1, String apellido2, String email, LocalDate fechanac, String provincia, String telefono, String genero) {
         this.nombre = nombre;
         this.apellido1 = apellido1;
         this.apellido2 = apellido2;
@@ -31,11 +31,13 @@ public class Usuario {
         this.fechanac = fechanac;
         this.provincia = provincia;
         this.telefono = telefono;
-        switch(genero){
-            case 1 -> this.genero = this.genero.Hombre;
-            case 2 -> this.genero = this.genero.Mujer;
-            case 3 -> this.genero = this.genero.Otro;
-        }
+       if (genero.equalsIgnoreCase("H")) { 
+            this.genero = this.genero.Hombre; 
+        }else if (genero.equalsIgnoreCase("M")) { 
+            this.genero = this.genero.Mujer; 
+        }else if (genero.equalsIgnoreCase("o")){ 
+            this.genero = this.genero.Otro; 
+        } 
     }
 
     public String getNombre() {

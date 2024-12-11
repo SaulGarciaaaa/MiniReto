@@ -15,8 +15,8 @@ public class Aplicacion {
         Scanner scanner = new Scanner(System.in);
         Usuario[] usu = new Usuario[5];
         int opcion;
-        LocalDate fecha = LocalDate.of(1995, 5, 6);
-        //usu[0]= new Usuario("Fermin", "Alejo", "Campos", "Fermin@gmail.com", fecha, "Cantabria", 1);
+       /* LocalDate fecha = LocalDate.of(1995, 5, 6);
+        usu[0]= new Usuario("Fermin", "Alejo", "Campos", "Fermin@gmail.com", fecha, "Cantabria", 1); */
          
         do {
             System.out.println("");
@@ -135,7 +135,6 @@ public class Aplicacion {
     }
 
     public static Usuario existeUsuario(Usuario[] usuarios, String nombre, String apellido1, String apellido2) {
-        boolean existe = true;
         Usuario aux = null;
         for (Usuario usuario : usuarios) {
             if (usuario != null && usuario.getNombre().equals(nombre)

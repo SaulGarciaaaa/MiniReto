@@ -11,10 +11,15 @@ import java.util.Scanner;
  */
 public class Aplicacion {
 
-    public static void main(String[] args) {
+   public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        Usuario[] usu = new Usuario[5];
         int opcion;
+        LocalDate fecha = LocalDate.of(1995, 5, 6);
+        usu[0]= new Usuario("Fermin", "Alejo", "Campos", "Fermin@gmail.com", fecha, "Cantabria", 1);
+         
         do {
+            System.out.println("");
             System.out.println("-------- Actividades deportivas --------");
             System.out.println("MENU:");
             System.out.println("1. Crear Usuario ");
@@ -30,9 +35,58 @@ public class Aplicacion {
             System.out.println("¿Que quieres hacer? ");
 
             opcion = scanner.nextInt();
+
             switch (opcion) {
-                case 1 ->
-                    M1();
+                case 1 -> {
+                    System.out.println("Introduce tu nombre");
+                    String nombre = new Scanner(System.in).nextLine();
+                    System.out.println("Introduce tu primer apellido");
+                    String ap1 = new Scanner(System.in).nextLine();
+                    System.out.println("Introduce tu segundo apellido");
+                    String ap2 = new Scanner(System.in).nextLine();
+                    System.out.println("Introduce tu email");
+                    String email = new Scanner(System.in).nextLine();
+                    boolean fechacomp = false;
+                    int dia, mes, año;
+                    do {
+                        System.out.println("Introduce tu fecha de nacimineto ");
+                        System.out.println("Introduce el dia de nacimeineto");
+                        dia = new Scanner(System.in).nextInt();
+                        System.out.println("Introduce el mes de nacimeineto");
+                        mes = new Scanner(System.in).nextInt();
+                        System.out.println("Introduce el año de nacimiento");
+                        año = new Scanner(System.in).nextInt();
+                        if (fechaValida(dia, mes, año) == true) {
+                            fechacomp = true;
+                        } else {
+                            System.out.println("Formato de fecha incorrecta");
+                        }
+                    } while (fechacomp != true);
+                    LocalDate fecha2 = LocalDate.of(año, mes, dia);
+                    System.out.println("Introduce tu provincia");
+                    String prov = new Scanner(System.in).nextLine();
+                    System.out.println("Introduce tu genero 1-Hombre 2-Mujer 3-Otro");
+                    int genero = new Scanner(System.in).nextInt();
+
+                    if (existeUsuario(usu, nombre, ap1, ap2) == null) {
+                        boolean salir = false;
+                        for (int i = 0; i < usu.length && !salir; i++) {
+                            if (usu[i] == null) {
+                                Usuario U1 = new Usuario(nombre, ap1, ap2, email, fecha2, prov, genero);
+                                System.out.println("Usuario guardado....");
+                                usu[i] = U1;
+                                salir = true;
+                            }
+                        }
+                        if (!salir) {
+                            System.out.println("No hay espacio suficiente para guardar al usuario");
+                        } 
+                        }else {
+                            System.out.println("El usuario ya esta creado");
+                    }
+                }
+
+
                 /*
                 case 2 -> ;                            
                 case 3 ->  ;               
@@ -51,62 +105,25 @@ public class Aplicacion {
         } while (opcion != 10);
     }
 
-    public static void M1() {
-        System.out.println("Introduce tu nombre");
-        String nombre = new Scanner(System.in).nextLine();
-        System.out.println("Introduce tu primer apellido");
-        String ap1 = new Scanner(System.in).nextLine();
-        System.out.println("Introduce tu segundo apellido");
-        String ap2 = new Scanner(System.in).nextLine();
-        System.out.println("Introduce tu email");
-        String email = new Scanner(System.in).nextLine();
-        boolean fechacomp = false;
-        int dia,mes,año;
-        do {
-            System.out.println("Introduce tu fecha de nacimineto ");
-            System.out.println("Introduce el dia de nacimeineto");
-             dia = new Scanner(System.in).nextInt();
-            System.out.println("Introduce el mes de nacimeineto");
-             mes = new Scanner(System.in).nextInt();
-            System.out.println("Introduce el año de nacimiento");
-             año = new Scanner(System.in).nextInt();
-            if (fechaValida(dia, mes, año)==true) {
-                fechacomp = true;
-            } else {
-                System.out.println("Formato de fecha incorrecta");
-            }
-        } while (fechacomp != true);
-        LocalDate fecha = LocalDate.of(año,mes,dia);
-        System.out.println("Introduce tu provincia");
-        String prov = new Scanner(System.in).nextLine();
-        System.out.println("Introduce tu genero 1-Hombre 2-Mujer 3-Otro");
-        int genero = new Scanner(System.in).nextInt();
-       /* if (existeUsuario(nombre,ap1,ap2)==false) {
-               Usuario U1 = new Usuario(nombre, ap1, ap2, email, fecha, prov, genero);
-                 System.out.println("Usuario guardado....");
-        }else{
-            System.out.println("El usuario ya esta creado");
-        }
-        */
-    }
-
     public static boolean fechaValida(int dia, int mes, int año) {
-        boolean valida=false;
-        int [] maxdias={0,31,28,31,30,31,30,31,31,30,31,30,31};
-        if (mes<1||mes>12||dia<1||dia>31) {
-               valida=false;
-            }else{
-            if (esBisiesto(año)==true) {
-                    maxdias[2]=29;
-                }
-                if (dia<=maxdias[mes]) {
-                    valida=true;
-                }else{
-                    valida=false;
-                }
-        } 
+        boolean valida = false;
+        int[] maxdias = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        LocalDate maxaño = LocalDate.now();
+        if (mes < 1 || mes > 12 || dia < 1 || dia > 31 || año > maxaño.getYear()) {
+            valida = false;
+        } else {
+            if (esBisiesto(año) == true) {
+                maxdias[2] = 29;
+            }
+            if (dia <= maxdias[mes]) {
+                valida = true;
+            } else {
+                valida = false;
+            }
+        }
         return valida;
     }
+
     public static boolean esBisiesto(int año) {
         boolean compaño = false;
         if (año % 4 == 0) {
@@ -114,13 +131,15 @@ public class Aplicacion {
         }
         return compaño;
     }
-   /*
-    public static boolean existeUsuario(String nombre,String apellido1,String apellido2) {
-        boolean existe=true;
-        if (existe) {
-            
+
+    public static Usuario existeUsuario(Usuario[] usuarios, String nombre, String apellido1, String apellido2) {
+        boolean existe = true;
+        for (Usuario usuario : usuarios) {
+            if (usuario != null && usuario.getNombre().equals(nombre)
+                    && usuario.getApellido1().equals(apellido1) && usuario.getApellido2().equals(apellido2)) {
+                return usuario;
+            }
         }
         return null;
     }
-   */
 }

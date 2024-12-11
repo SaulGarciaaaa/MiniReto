@@ -16,7 +16,7 @@ public class Aplicacion {
         Usuario[] usu = new Usuario[5];
         int opcion;
         LocalDate fecha = LocalDate.of(1995, 5, 6);
-        usu[0]= new Usuario("Fermin", "Alejo", "Campos", "Fermin@gmail.com", fecha, "Cantabria", 1);
+        //usu[0]= new Usuario("Fermin", "Alejo", "Campos", "Fermin@gmail.com", fecha, "Cantabria", 1);
          
         do {
             System.out.println("");
@@ -65,6 +65,8 @@ public class Aplicacion {
                     LocalDate fecha2 = LocalDate.of(año, mes, dia);
                     System.out.println("Introduce tu provincia");
                     String prov = new Scanner(System.in).nextLine();
+                    System.out.println("Introduce tu numero de telefono");
+                    String tlf = new Scanner(System.in).nextLine();
                     System.out.println("Introduce tu genero 1-Hombre 2-Mujer 3-Otro");
                     int genero = new Scanner(System.in).nextInt();
 
@@ -72,7 +74,7 @@ public class Aplicacion {
                         boolean salir = false;
                         for (int i = 0; i < usu.length && !salir; i++) {
                             if (usu[i] == null) {
-                                Usuario U1 = new Usuario(nombre, ap1, ap2, email, fecha2, prov, genero);
+                                Usuario U1 = new Usuario(nombre, ap1, ap2, email, fecha2, prov, tlf, genero);
                                 System.out.println("Usuario guardado....");
                                 usu[i] = U1;
                                 salir = true;
@@ -125,21 +127,22 @@ public class Aplicacion {
     }
 
     public static boolean esBisiesto(int año) {
-        boolean compaño = false;
+        boolean companno = false;
         if (año % 4 == 0) {
-            compaño = true;
+            companno = true;
         }
-        return compaño;
+        return companno;
     }
 
     public static Usuario existeUsuario(Usuario[] usuarios, String nombre, String apellido1, String apellido2) {
         boolean existe = true;
+        Usuario aux = null;
         for (Usuario usuario : usuarios) {
             if (usuario != null && usuario.getNombre().equals(nombre)
                     && usuario.getApellido1().equals(apellido1) && usuario.getApellido2().equals(apellido2)) {
-                return usuario;
+                aux = usuario;
             }
         }
-        return null;
+        return aux;
     }
 }

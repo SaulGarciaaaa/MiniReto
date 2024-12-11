@@ -18,22 +18,24 @@ public class Usuario {
     private LocalDate fechanac;
     private String provincia;
     private String contraseña;
-    private enum genero{
-        Hombre,Mujer,Otro
-    };
+    private String telefono;
+    private Genero genero;
+    private Perfil perfil;
 
-    public Usuario(String nombre, String apellido1, String apellido2, String email, LocalDate fechanac, String provincia,int numgen) {
+    public Usuario(String nombre, String apellido1, String apellido2, String email, LocalDate fechanac, String provincia, String telefono, int genero) {
         this.nombre = nombre;
         this.apellido1 = apellido1;
         this.apellido2 = apellido2;
         this.email = email;
         this.fechanac = fechanac;
         this.provincia = provincia;
-        genero gen=genero.Hombre;
-        if (numgen==2) {
-         gen=genero.Mujer;
-        }else if (numgen==3){
-            gen=genero.Otro;
+        this.telefono = telefono;
+        if (genero==1) {
+            this.genero = this.genero.Hombre;
+        }else if (genero==2) {
+            this.genero = this.genero.Mujer;
+        }else if (genero==3){
+            this.genero = this.genero.Otro;
         }
     }
 
@@ -49,6 +51,8 @@ public class Usuario {
         return apellido2;
     }
     
-            
+    public void proponerReto(){
+        
+    }        
 }
 

@@ -36,5 +36,19 @@ public class Usuario {
             gen=genero.Otro;
         }
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getApellido1() {
+        return apellido1;
+    }
+
+    public String getApellido2() {
+        return apellido2;
+    }
+    
             
 }
+

@@ -37,3 +37,4 @@ public class Waypoint {
     return String.format("WAYPOINT:%d %nNombre: %s Tipo: %s %n\tDistancia del inicio: %,.2f Coordenadas: %dlongitud %dlatitud ",numeroWaypoint,nombreReto,tipo, distanciaInicio,longitud,latitud);
     
     }
+}
